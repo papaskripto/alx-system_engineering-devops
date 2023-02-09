@@ -1,2 +1,2 @@
 #!/bin/bash
-ls * . .. -m -d */ [0-9A-Za-z]* | sort -f
+ls * . .. -m -p [0-9A-Za-z]* | sort -f
