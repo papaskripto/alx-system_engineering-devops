@@ -1,2 +1,2 @@
 #!/bin/bash
-echo NUM=$(printf "%.2f\n" 3.14159)
+echo NUM=$(printf "%.2f\n" 0.00)
