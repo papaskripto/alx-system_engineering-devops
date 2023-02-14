@@ -1,2 +1,2 @@
-#!/bin/bash
-echo `expr $(echo $BREATH\*$LOVE)
+#!/bin/
+echo $(($BREATH * $LOVE))
