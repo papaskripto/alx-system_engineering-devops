@@ -1,2 +1,3 @@
-#!/bin/bash
-ps -o pid,args -C bash | awk '/0-what-is-my-pid/ { print $1 }'
+#!/bin/env bash
+# displays its own pid
+echo $$
