@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# This script configures an Ubuntu server with the below requirements
 cp /etc/hosts ~/hosts.new
 
 echo "127.0.0.1		localhost" > ~/hosts.new
