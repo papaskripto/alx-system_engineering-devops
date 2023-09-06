@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# refactor the prev code
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
+rm /run/nginx.pi
