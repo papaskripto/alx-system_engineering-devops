@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# configures the container to:
+#	- nginx to run as a nginx user
+#	- nginx must be listening on all active IPs on port 8080
+# without using apt-get remove command
+sudo pkill apache2
+sudo chmod 644 /etc/nginx/nginx.conf
+sudo sed -i 's/80/8080' /etc/nginx/sites-enabled/default
+sudo su nginx -c "servive nginx start"
