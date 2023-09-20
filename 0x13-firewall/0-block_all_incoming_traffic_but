@@ -3,8 +3,10 @@
 # install ufw firewall
 # block all incoming traffic
 # but 22(SSH), 443(HTTPS SSL), and 80(HTTP) TCP ports
-sudo ufw disable
+
+# sudo ufw disable
 sudo ufw default deny incoming
+sudo ufw default allow outgoing
 sudo ufw allow 22/tcp
 sudo ufw allow 443/tcp
 sudo ufw allow 80/tcp
