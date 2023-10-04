@@ -1,29 +1,16 @@
 #!/usr/bin/python3
-""" Exports data in CSV format
-"""
-import sys
+"""Exports data in CSV format"""
 import csv
 import requests
+from sys import argv
 
 
 if __name__ == "__main__":
-
-    url_one = 'https://jsonplaceholder.typicode.com/users/' + sys.argv[1]
-    req_one = requests.get(url_one)
-
-    if req_one.status_code == 200:
-
-        user_name = req_one.json().get("user_name")
-        url_two = 'https://jsonplaceholder.typicode.com/todos'
-        req_two = requests.get(url_two)
-        file_name = sys.argv[1] + '.csv'
-
-        with open(file_name, 'w') as _file:
-            temp = csv.write(_file, quoting=csv.QUOTE_ALL, delimeter=',')
-            for i in req_two.json():
-                if i.get("user_id") == int(sys.argv[1]):
-                    line = [i.get("user_id"),
-                        user_name,
-                        str(i.get("completed")),
-                        i.get('title')]
-                    temp.writerow(line)
+	tmp = requests.get("https://jsonplaceholder.typicode.com/users/{:}".format(argv[1])).json()
+	temp = requests.get("https://jsonplaceholder.typicode.com/todos/?userId={:}".format(argv[1])).json()
+	user_id = argv[1]
+	user_name = tmp.get("username")
+	with open("{:}.csv".format(argv[1]), mode="w") as file:
+		user_id_w = csv.writer(file, quoting=csv.QUOTE_ALL)
+		for e in temp:
+			user_id_w.writerow([user_id, user_name, e.get("completed"), e.get("title")])
