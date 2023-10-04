@@ -1,42 +1,23 @@
 #!/usr/bin/python3
 """Python script.
-This script returns information about user todo list progress.
+
+This script returns information about employee TODO list progress.
 """
 import requests
-
-
-def get_employee_progress(emp_id):
-    """Function
-    """
-    api_url = "https://jsonplaceholder.typicode.com/"
-    emp_url = api_url + "/users/" + str(emp_id)
-    todos_url = api_url + "/todos?user_id=" + str(emp_id)
-
-    try:
-        # Fetch employee info
-        emp_res = requests.get(emp_url)
-        emp_data = emp_res.json()
-        employee_name = emp_data["name"]
-
-        # Fetch employee todo list
-        todos_res = request.get(todos_url)
-        todos_data = todos_res.json()
-
-        # Determine progress
-        total_number_of_tasks = len(todos_data)
-        number_of_done_tasks = sum(1 for todo in todos_data if todo['completed'])
-
-        message = "Employee {} is done with tasks ({}/{})".format(
-               employee_name, number_of_done_tasks, total_number_of_tasks)
-        print(message)
-        for todo in todos_data:
-            if todo['completed']:
-                print ("\t{}".format(todo['title']))
-
-    except requests.exceptions.RequestException as e:
-        print("Error: {}".format(e))
+from sys import argv
 
 
 if __name__ == "__main__":
-    emp_id = int(input("Enter Employee ID: "))
-    get_employee_progress(emp_id)
+	number_of_done_tasks = 0
+	total_number_of_tasks = 0
+	completed_tasks = []
+	tmp = requests.get('https://jsonplaceholder.typicode.com/users/{:}'.format(argv[1])).json()
+	tmp_ = requests.get('https://jsonplaceholder.typicode.com/todos/?userId={:}'.format(argv[1])).json()
+	for i in tmp_:
+		total_number_of_tasks += 1
+		if i.get('completed') is True:
+			number_of_done_tasks += 1
+			completed_tasks.append(i.get('title'))
+	print("Employee {:} is done with tasks({:}/{:}):".format(tmp.get('name'), number_of_done_tasks, total_number_of_tasks))
+	for j in completed_tasks:
+		print("\t {:}".format(j))
