@@ -6,16 +6,16 @@ from sys import argv
 
 
 if __name__ == "__main__":
-	user_id = argv[1]
-	user = requests.get("https://jsonplaceholder.typicode.com/users/{}".
-		format(user_id), verify=False).json()
-	todo = requests.get("https://jsonplaceholder.typicode.com/todos?userId={}".
-		format(user_id), verify=False).json()
+	employee_id = argv[1]
+	employee_name = requests.get("https://jsonplaceholder.typicode.com/users/{}".
+		format(employee_id), verify=False).json()
+	total_number_of_tasks = requests.get("https://jsonplaceholder.typicode.com/todos?userId={}".
+		format(employee_id), verify=False).json()
 	number_of_done_tasks = []
-	for task in todo:
+	for task in total_number_of_tasks:
 		if task.get("completed") is True:
 			number_of_done_tasks.append(task.get("title"))
 	print("Employee {} is done with tasks ({}/{}):".
-		format(user.get("name"), len(number_of_done_tasks), len(todo)))
+		format(employee_name.get("name"), len(number_of_done_tasks), len(total_number_of_tasks)))
 	for task in number_of_done_tasks:
 		print("\t {}".format(task))
